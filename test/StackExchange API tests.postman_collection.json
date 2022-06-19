@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "7c3a271b-9ba6-46d7-b3c5-a5e91c5da1a2",
+		"name": "StackExchange API tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21533455"
+	},
+	"item": [
+		{
+			"name": "Correct request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/stackstats?since=2020-10-02 10:00:00&until=2020-10-02 11:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"stackstats"
+					],
+					"query": [
+						{
+							"key": "since",
+							"value": "2020-10-02 10:00:00"
+						},
+						{
+							"key": "until",
+							"value": "2020-10-02 11:00:00"
+						}
+					]
+				},
+				"description": "This is a valid time frame"
+			},
+			"response": []
+		},
+		{
+			"name": "Missing value 'since'",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/stackstats?until=2020-10-02 11:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"stackstats"
+					],
+					"query": [
+						{
+							"key": "since",
+							"value": "2020-10-02 10:00:00",
+							"disabled": true
+						},
+						{
+							"key": "until",
+							"value": "2020-10-02 11:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Missing value 'until'",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/stackstats?since=2020-10-02 10:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"stackstats"
+					],
+					"query": [
+						{
+							"key": "since",
+							"value": "2020-10-02 10:00:00"
+						},
+						{
+							"key": "until",
+							"value": "2020-10-02 11:00:00",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wrong format value 'since'",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/stackstats?since=2020-13-02 10:00:00&until=2020-10-02 11:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"stackstats"
+					],
+					"query": [
+						{
+							"key": "since",
+							"value": "2020-13-02 10:00:00"
+						},
+						{
+							"key": "until",
+							"value": "2020-10-02 11:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Wrong format value 'until'",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/stackstats?since=2020-10-02 10:00:00&until=2019-10-33 11:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"stackstats"
+					],
+					"query": [
+						{
+							"key": "since",
+							"value": "2020-10-02 10:00:00"
+						},
+						{
+							"key": "until",
+							"value": "2019-10-33 11:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid time frame",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/stackstats?until=2020-10-02 10:00:00&since=2020-10-02 11:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"stackstats"
+					],
+					"query": [
+						{
+							"key": "until",
+							"value": "2020-10-02 10:00:00"
+						},
+						{
+							"key": "since",
+							"value": "2020-10-02 11:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
