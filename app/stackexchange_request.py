@@ -30,24 +30,24 @@ def answers_api_request(since,until):
     until_total_sec = str(int((until_datetime-begining_of_time).total_seconds()))
 
 ### 'answers' API request #####################################################
-    # Create the data to be passed to the API
+    # Create the data to be passed to the StackExchange API ('answers' endpoint)
     data = {'fromdate':  since_total_sec, 'todate': until_total_sec, \
             'site': 'stackoverflow', 'order': 'desc', 'sort': 'votes'}
 
     # GET Request to the StackExchange answers API
-    answer_response = get(URL, data = data)
+    answer_response = get(URL, params = data)
 
-### Decode/Transform to JSON format and return data ###########################
+### Return data to the main API thread ########################################
+    # Decode/Transform to JSON format
     assert loads(answer_response.content.decode())
     answer_response = answer_response.json()
 
     return answer_response
 
 
-
-
 def calculate_statistics(response_items):
-    # Get a copy of the template
+### Create a copy of the template and check for exceptions ####################
+    # Get template copy
     response_body = response_template.copy()
 
     # If no items, return empty response template
@@ -59,7 +59,8 @@ def calculate_statistics(response_items):
     avg_score = sum([x["score"] for x in response_items if x["is_accepted"]])/total_accepted
 
 ### Calculate the average answer count per question ###########################
-### Instead of the pythonic way, it is better to make it readable #############
+    # Instead of the pythonic way, it is better to make it readable
+
     # Get the ids of all the questions that the answers belong to
     question_ids = [x["question_id"] for x in response_items]
 
@@ -70,29 +71,33 @@ def calculate_statistics(response_items):
     avg_answers_per_question = sum(question_occurences)/len(question_occurences)
 
 ### Calculate comment count for each of the top 10 answers ####################
+    # Again, instead of the pythonic way, it is better to make it readable
+
     # Get the ids of the top 10 answers
     top_ten_answer_ids = [str(x["answer_id"]) for x in response_items[:10]]
 
-    # Create the query for the API request
+    # Create the query for the StackExchange API request ('comments' endpoint)
+    # This endpoint accepts a list of ids, separated by semicolon (max 100)
     query = '/'+';'.join(top_ten_answer_ids)
 
-    # data is just the required values from the API
+    # data is just the required values from the StackExchange API
     data = {'order':'desc','site':'stackoverflow'}
 
-    # GET Request to the StackExchange 'comments' API
+    # GET Request to the StackExchange API ('comments' endpoint)
     comments_response = get(URL+query+'/comments', data = data)
 
     # Decode/Transform data to JSON format
     assert loads(comments_response.content.decode())
     comments_response = comments_response.json()
 
+    # Get items of response
     comments_items = comments_response['items']
 
     # The post ids reffer to the original answers that have comments
     post_ids = [str(x["post_id"]) for x in comments_items]
 
     # Count occurences of each of the top 10 ids in the above list
-    # Maybe this is slow
+    # *Note* There is probably a faster way
     top_ten_answers_comment_count = {x:post_ids.count(x) for x in top_ten_answer_ids}
 
 ### Fill the response_body ####################################################

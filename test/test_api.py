@@ -13,7 +13,7 @@ URL = 'http://localhost:5000/api/v1/stackstats'
 # request function
 def api_request(data):
     """
-    This function is a wrapper for the API request tests
+    This function is a wrapper for the statistics API request tests
     """
     rsp = requests.get(URL, params=data)
     assert json.loads(rsp.content.decode())
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     data_wrong_format_since = {'since': since[2:] , 'until': until}
     data_wrong_format_until = {'since': since , 'until': until[3:]}
 
-    # Get responses
+    # Get responses for various test cases
     rsp_correct_request = api_request(data_sane)
     rsp_invalid_interval = api_request(data_invalid_interval)
     rsp_missing_since = api_request(data_missing_since)

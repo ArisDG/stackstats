@@ -13,15 +13,18 @@ cache = Cache(app)
 @cache.cached(timeout=30, query_string=True)
 def get_statistics():
 ### Parse Values ##############################################################
+    # If argument is not provided, request returns None
     since = request.args.get('since')
     until = request.args.get('until')
 
 ### Test for exceptions #######################################################
+    # Check validity of arguments
     exception_response = test_input(since,until)
     if exception_response:
         return exception_response
 
-### If no exceptions, make the request to StackExchange API (answers endpoint)#
+### If no exceptions, make the request to StackExchange API ('answers' endpoint)
+    # First, make the request
     answers_api_response = answers_api_request(since,until)
 
     # If anything goes wrong, return the StackExchange API message

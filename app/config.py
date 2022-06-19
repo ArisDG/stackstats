@@ -1,5 +1,6 @@
 import os
 
+# Config class for the flask app to load the caching enviromental variables
 class BaseConfig(object):
     CACHE_TYPE = os.environ['CACHE_TYPE']
     CACHE_REDIS_HOST = os.environ['CACHE_REDIS_HOST']
