@@ -54,16 +54,16 @@ Response body example for input `since = 2020-10-02 10:00:00` & `until = 020-10-
     "accepted_answers_average_score": 3.8,
     "average_answers_per_question": 1.0714285714285714,
     "top_ten_answers_comment_count": {
-    	"64169696":0,
-    	"64169736":0,
-    	"64169856":2,
-    	"64169877":6,
-    	"64169929":3,
-    	"64169981":1,
-    	"64170070":2,
-    	"64170246":0,
-    	"64170260":0,
-    	"64170281":0}
+        "64169696":0,
+        "64169736":0,
+        "64169856":2,
+        "64169877":6,
+        "64169929":3,
+        "64169981":1,
+        "64170070":2,
+        "64170246":0,
+        "64170260":0,
+        "64170281":0}
 }
 ```
 
@@ -93,7 +93,7 @@ requests
 To install and run the service you need `docker` & `docker-compose`.
 
 - First, clone the repo.
-- cd into the app folder
+- cd into the `app\` folder
     ```
     cd app
     ```
@@ -112,7 +112,7 @@ To install and run the service you need `docker` & `docker-compose`.
 
 ## Testing
 
-To test the service, there are two methods provided.
+To test the service, there are two methods provided, within the `test\` folder.
 
 The first method is an export of `postman` collections, that sends various sanity checks to the `API` in order to test the exception handling capabilities.
 
