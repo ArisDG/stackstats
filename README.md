@@ -93,7 +93,7 @@ requests
 To install and run the service you need `docker` & `docker-compose`.
 
 - First, clone the repo.
-- cd into the `app\` folder
+- cd into the `app` folder
     ```
     cd app
     ```
@@ -112,7 +112,7 @@ To install and run the service you need `docker` & `docker-compose`.
 
 ## Testing
 
-To test the service, there are two methods provided, within the `test\` folder.
+To test the service, there are two methods provided, within the `test` folder.
 
 The first method is an export of `postman` collections, that sends various sanity checks to the `API` in order to test the exception handling capabilities.
 
