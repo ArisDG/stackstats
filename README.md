@@ -14,7 +14,7 @@ The complete service is running as a `dockerized` container.
 
 The API supports caching, utilizing the `redis` framework for faster response times when making the same requests within a short period of time.
 
-It accepts two datetime format parameters ('`%Y-%m-%d %H:%M:%S`'), namely `since` and `until`, as input and retrieves data from the `StackExchange API`, calculates some statistics and reports them back to the user.
+It accepts two string parameters following a specific datetime format pattern ('`%Y-%m-%d %H:%M:%S`'), namely `since` and `until`, as input and retrieves data from the `StackExchange API`, calculates some statistics and reports them back to the user.
 
 
 
@@ -31,7 +31,7 @@ The application requests data from two StackExchange API endpoints:
 ## Objective
 
 The service communicates with the `StackExchange API` and performs the following tasks:
-- Retrieves the StackOverflow answer data for the given date/time range (`answers` endpoint.
+- Retrieves the StackOverflow answer data for the given date/time range (`answers` endpoint).
 - Retrieves the comment data for this set of answers (`/answers/{ids}/comments` endpoint).
 - Finally, calculates the following statistics:
     - the total number of accepted answers.
@@ -80,6 +80,15 @@ Additionally, you can set your own values for `since` & `until` and get the resu
 
 
 ## Installation & Requirements
+
+The module dependecies for the `API` are defined in the `requirements.txt` file and are automatically installed during the container's build process. These dependencies are namely:
+
+```
+Flask
+Flask-Caching
+redis
+requests
+```
 
 To install and run the service you need `docker` & `docker-compose`.
 
