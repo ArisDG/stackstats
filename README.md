@@ -5,6 +5,7 @@ A Python service that retrieves data from the `StackExchange API` and calculates
 
 
 
+
 ## Overview
 
 This application runs as a long-running service. It provides a `REST API` written in `python 3.6`, using the `flask` module.
@@ -17,11 +18,13 @@ It accepts two datetime format parameters ('`%Y-%m-%d %H:%M:%S`'), namely `since
 
 
 
+
 ## StackExchange API
 
 The application requests data from two StackExchange API endpoints:
 - `answers` (<https://api.stackexchange.com/docs/answers>), and
 - `/answers/{ids}/comments` (<https://api.stackexchange.com/docs/comments-on-answers>).
+
 
 
 
@@ -37,6 +40,7 @@ The service communicates with the `StackExchange API` and performs the following
     - the comment count for each of the 10 answers with the highest score.
 
 When installed properly the service is accesible in the host machine via <http://localhost:5000/api/v1/stackstats>.
+
 
 
 
@@ -63,6 +67,17 @@ Response body example for input `since = 2020-10-02 10:00:00` & `until = 020-10-
 }
 ```
 
+To run this example from terminal, run: 
+```
+curl -G --url http://localhost:5000/api/v1/stackstats?since=2020-10-02%2010:00:00\&until=2020-10-02%2011:00:00
+```
+
+Or with any browser, access: <http://localhost:5000/api/v1/stackstats?since=2020-10-02%2010:00:00\&until=2020-10-02%2011:00:00>
+
+Additionally, you can set your own values for `since` & `until` and get the results, as previously.
+
+
+
 
 ## Installation & Requirements
 
@@ -82,6 +97,7 @@ To install and run the service you need `docker` & `docker-compose`.
     ```
     docker compose up
     ```
+
 
 
 
