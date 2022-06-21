@@ -2,7 +2,7 @@ import datetime
 from flask import jsonify
 
 
-def test_input(since,until):
+def check_input(since,until):
 ### Check for missing fields ###################################################
     # since
     if not since:
@@ -45,7 +45,7 @@ def test_input(since,until):
             {'ContentType':'application/json'}
 
 
-def test_response(response):
+def check_response(response):
 ### Checks the 'answers' API response for errors ##############################
     # In case of errors ('error'_id key in response dict), returns the 
     # StackExchange API ('answers' endpoint) response to the client

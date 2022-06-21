@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_caching import Cache
-from exceptions import test_input, test_response
+from exceptions import check_input, check_response
 from stackexchange_request import answers_api_request, calculate_statistics
 
 
@@ -18,7 +18,7 @@ def get_statistics():
 
 ### Test for exceptions #######################################################
     # Check validity of arguments
-    exception_response = test_input(since,until)
+    exception_response = check_input(since,until)
     if exception_response:
         return exception_response
 
@@ -27,7 +27,7 @@ def get_statistics():
     answers_api_response = answers_api_request(since,until)
 
     # If anything goes wrong, return the StackExchange API message
-    answers_api_exception = test_response(answers_api_response)
+    answers_api_exception = check_response(answers_api_response)
     if answers_api_exception:
         return answers_api_exception
 
