@@ -4,7 +4,6 @@ the ones exported from postman
 
 """
 import json
-from datetime import datetime
 import requests
 
 # api endpoint
@@ -15,19 +14,14 @@ def api_request(data):
     """
     This function is a wrapper for the statistics API request tests
     """
-    rsp = requests.get(URL, params=data)
-    assert json.loads(rsp.content.decode())
-    data = rsp.json()
-    return data
+    return requests.get(URL, params=data).json()
 
 
 if __name__ == "__main__":
 
     # Get two sample dates in the specified format
-    until = datetime.now()
-    until = until.strftime("%Y-%m-%d %H:%M:%S")
-
-    since = '2021-04-01 00:00:00'
+    until = '2020-10-03 00:00:00'
+    since = '2020-10-02 00:00:00'
 
     # Prepare data for exception testing
     data_sane = {'since': since , 'until': until}
