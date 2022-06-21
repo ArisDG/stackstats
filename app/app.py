@@ -5,11 +5,11 @@ from stackexchange_request import answers_api_request, calculate_statistics
 
 
 app = Flask(__name__)
-# app.config.from_object('config.BaseConfig')
+app.config.from_object('config.BaseConfig')
 cache = Cache(app)
 
 @app.route('/api/v1/stackstats', endpoint='get_statistics', methods=['GET'])
-# @cache.cached(timeout=30, query_string=True)
+@cache.cached(timeout=30, query_string=True)
 def get_statistics():
 ### Parse Values ##############################################################
     # If argument is not provided, request returns None
